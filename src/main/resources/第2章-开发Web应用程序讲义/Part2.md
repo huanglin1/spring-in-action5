@@ -3,6 +3,22 @@
 Spring重要模块
 ![Spring组件](Spring组件.png)
 ### IOC 面向控制反转
+在Spring 我们常说的控制反转和依赖注入其实是一体两面，都是IOC的表现形式，**控制反转(IOC)**，是指对象的创建和配置的控制权从调用方转移给Spring Bean容器。  
+有了IOC容器，我们可以将对象交由对象管理，交由容器管理后的对象称之为Bean.调用方不再负责组件的创建，要使用组件时直接获取Bean即可：
+```
+@Component
+public class UserServiceImpl implements UserService{
+    @Autowired // 获取 Bean
+    private UserDao userDao;
+}
+```
+从另一方面讲，调用方只需要按照约定声明依赖项，所需要的Bean就自动配置完毕了，就好像在调用方外部注入了一个依赖项给其使用，所以这种方法称之为依赖注入（Dependency Injection,DI）
+#### 常见的四种Bean注解
+我们一般使用@Autowired 注解自动装备Bean,要想把类标识成可用于@Autowired 注解自动装配的bean的类，采用以下注解：
+- **@Component:** 通用的注解，可标注任意类为Spring组件。如果一个Bean不知道属于哪个层，可以使用@Component注解标注。
+- **@Repository:** 对应持久层即Dao层，主要用于数据库相关操作
+- **@Service:** 对应服务层，主要涉及一些服务的逻辑，需要用到Dao层
+- **@Controller:** 对应Spring MVC控制层，主要用户接受用户请求并调用Service 层返回数据给前端页面
 
 ### AOP 面向切面
 
